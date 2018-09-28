@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerController : MonoBehaviour {
 
@@ -36,7 +38,12 @@ public class PlayerController : MonoBehaviour {
     // Update called before rendering frame
     void Update()
     {
-        
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
     }
 
     // Physics code applies
@@ -61,6 +68,8 @@ public class PlayerController : MonoBehaviour {
         // 
         if (count>=12){
             winText.text = "You Win!";
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
