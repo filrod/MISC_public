@@ -398,7 +398,7 @@ GameObject:
   - component: {fileID: 317079966}
   m_Layer: 0
   m_Name: west_wall
-  m_TagString: Untagged
+  m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -941,6 +941,95 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 763799059}
   m_CullTransparentMesh: 0
+--- !u!1 &832822417
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 832822418}
+  - component: {fileID: 832822420}
+  - component: {fileID: 832822419}
+  - component: {fileID: 832822421}
+  m_Layer: 5
+  m_Name: Timer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &832822418
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 832822417}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2118564012}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 10, y: -40}
+  m_SizeDelta: {x: 160, y: 28}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &832822419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 832822417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.94509804, g: 0.94509804, b: 0.019607844, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 18
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Timer
+--- !u!222 &832822420
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 832822417}
+  m_CullTransparentMesh: 0
+--- !u!114 &832822421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 832822417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adab1c4919fa6f741b5e46945f31a2c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 30
+  timeText: {fileID: 832822419}
 --- !u!4 &870472852 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4325767961897588, guid: 0fe751fc734a26d438f1b9a1c2f88ee8,
@@ -969,7 +1058,7 @@ GameObject:
   - component: {fileID: 1022142787}
   m_Layer: 0
   m_Name: north_wall
-  m_TagString: Untagged
+  m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1189,7 +1278,7 @@ GameObject:
   - component: {fileID: 1246552096}
   m_Layer: 0
   m_Name: south_wall
-  m_TagString: Untagged
+  m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1288,10 +1377,10 @@ Transform:
   m_Children:
   - {fileID: 1323885909}
   - {fileID: 1344159740}
-  - {fileID: 141530505}
   - {fileID: 1424497929}
   - {fileID: 1208213739}
   - {fileID: 1120009892}
+  - {fileID: 141530505}
   m_Father: {fileID: 2136036495}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1347,7 +1436,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4058774758640858, guid: 1fad006c85de8d24d83b4d8ea1d4b908, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1740134627539986, guid: 1fad006c85de8d24d83b4d8ea1d4b908, type: 2}
       propertyPath: m_Name
@@ -1596,6 +1685,7 @@ MonoBehaviour:
   speed: 50
   countText: {fileID: 1609059239}
   winText: {fileID: 763799061}
+  collisionMult: 1e+9
 --- !u!54 &1664045371
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1658,7 +1748,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 8d6d4cc4c385e494e9282d2f2a6df424, type: 3}
+  - {fileID: 2100000, guid: cdfd8f8c0b0d79946aae433ebe696022, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1856,7 +1946,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4058774758640858, guid: 1fad006c85de8d24d83b4d8ea1d4b908, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1740134627539986, guid: 1fad006c85de8d24d83b4d8ea1d4b908, type: 2}
       propertyPath: m_Name
@@ -1902,7 +1992,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4058774758640858, guid: 1fad006c85de8d24d83b4d8ea1d4b908, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1740134627539986, guid: 1fad006c85de8d24d83b4d8ea1d4b908, type: 2}
       propertyPath: m_Name
@@ -1941,7 +2031,7 @@ GameObject:
   - component: {fileID: 1942531511}
   m_Layer: 0
   m_Name: east_wall
-  m_TagString: Untagged
+  m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2050,7 +2140,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4058774758640858, guid: 1fad006c85de8d24d83b4d8ea1d4b908, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1740134627539986, guid: 1fad006c85de8d24d83b4d8ea1d4b908, type: 2}
       propertyPath: m_Name
@@ -2328,6 +2418,7 @@ RectTransform:
   m_Children:
   - {fileID: 1609059238}
   - {fileID: 763799060}
+  - {fileID: 832822418}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

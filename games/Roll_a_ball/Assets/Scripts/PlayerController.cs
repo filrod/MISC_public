@@ -4,10 +4,14 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
     // Create a rigid body insance
     private Rigidbody rb;
+
+    private float moveHorizontal;
+    private float moveVertical;
 
     // Create a speed field
     public float speed;
@@ -20,6 +24,9 @@ public class PlayerController : MonoBehaviour {
 
     // Create text variable for win
     public Text winText;
+
+    private Vector3 ricochet = new Vector3(0.0f, 0.0f, 0.0f);
+    public float collisionMult;
 
     void Start()
     {
@@ -50,23 +57,26 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate()
     {
 
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        moveHorizontal = Input.GetAxis("Horizontal");
+        moveVertical = Input.GetAxis("Vertical");
 
         // Add a 3Vector for force
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);  // Initialized
 
-        rb.AddForce(movement*speed);
+        rb.AddForce(movement * speed);
+        rb.AddForce(ricochet * speed * collisionMult);
     }
 
     // Create a setter for countText
-    void set_countText() {
+    void set_countText()
+    {
 
         // Set Count text
         countText.text = "Coins: " + count.ToString();
 
         // 
-        if (count>=12){
+        if (count >= 12)
+        {
             winText.text = "You Win!";
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -78,13 +88,24 @@ public class PlayerController : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Pick Up"))
         {
-           
+
             other.gameObject.SetActive(false);
             // Increment the count
             count += 1;
 
             // Change the displayed count
             set_countText();
+        }
+
+        if (other.gameObject.CompareTag("Tree"))
+        {
+
+            // Add a 3Vector for force
+            ricochet = new Vector3(-moveHorizontal, 0.0f, -moveVertical);
+            FixedUpdate();
+            FixedUpdate();
+            FixedUpdate();
+            ricochet = new Vector3(0.0f, 0.0f, 0.0f);
         }
     }
 }
