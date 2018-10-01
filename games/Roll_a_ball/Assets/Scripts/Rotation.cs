@@ -10,7 +10,7 @@ public class Rotation : MonoBehaviour {
     void Start() {
 
         rotationVec.x = 10 * (Random.value + Mathf.Epsilon);
-        rotationVec.z = 10 * (Random.value + Mathf.Epsilon);
+        rotationVec.y = 10 * (Random.value + Mathf.Epsilon);
 
         rotationVec = rotationSpeed * Vector3.Normalize(rotationVec);
 
