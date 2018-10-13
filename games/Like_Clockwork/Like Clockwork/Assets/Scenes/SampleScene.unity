@@ -360,7 +360,7 @@ Camera:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.0065414715, g: 0.029678896, b: 0, a: 0.9647059}
   m_projectionMatrixMode: 2
   m_SensorSize: {x: 36, y: 24}
@@ -465,8 +465,8 @@ WheelCollider:
     damper: 4500
     targetPosition: 0.5
   m_SuspensionDistance: 0.3
-  m_ForceAppPointDistance: 0
-  m_Mass: 20
+  m_ForceAppPointDistance: -0.42
+  m_Mass: 5
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
@@ -572,7 +572,7 @@ WheelCollider:
     targetPosition: 0.5
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
-  m_Mass: 20
+  m_Mass: 5
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
@@ -879,6 +879,16 @@ Prefab:
       propertyPath: m_Name
       value: WheelRRauv
       objectReference: {fileID: 0}
+    - target: {fileID: 146044353561758132, guid: b05e26e41055e03448167717caf1ae7b,
+        type: 2}
+      propertyPath: m_Mass
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 146044353561758132, guid: b05e26e41055e03448167717caf1ae7b,
+        type: 2}
+      propertyPath: m_ForceAppPointDistance
+      value: -0.42
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b05e26e41055e03448167717caf1ae7b, type: 2}
   m_IsPrefabAsset: 0
@@ -929,7 +939,7 @@ WheelCollider:
     targetPosition: 0.5
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
-  m_Mass: 20
+  m_Mass: 5
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
