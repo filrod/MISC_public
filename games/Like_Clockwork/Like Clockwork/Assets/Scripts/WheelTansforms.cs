@@ -29,10 +29,10 @@ public class WheelTansforms : MonoBehaviour {
 
     private void Update()
     {
-        rotateWheel(wheelFL_trans, wheelFL);
-        rotateWheel(wheelFR_trans, wheelFR);
-        rotateWheel(wheelRL_trans, wheelRL);
-        rotateWheel(wheelRR_trans, wheelRR);
+        rotateWheel(wheelFL_trans, wheelFL, 1.82f);
+        rotateWheel(wheelFR_trans, wheelFR, 1.82f);
+        rotateWheel(wheelRL_trans, wheelRL, -1.65f);
+        rotateWheel(wheelRR_trans, wheelRR, -1.65f);
     }
 
     // Called several times per frame (physics)
@@ -101,7 +101,7 @@ public class WheelTansforms : MonoBehaviour {
         }
     }
 
-    private void rotateWheel(Transform wheel_t, WheelCollider wheel_col) {
+    private void rotateWheel(Transform wheel_t, WheelCollider wheel_col, float of) {
         /*
          * Method to rotate wheel.
          */
@@ -110,9 +110,11 @@ public class WheelTansforms : MonoBehaviour {
         float spinAmt = wheel_col.rpm
                        / (degPerRot * perMin * Time.deltaTime);
 
-        wheel_t.localEulerAngles = new Vector3(wheel_t.localEulerAngles.x, wheel_col.steerAngle - wheel_t.localEulerAngles.z, wheel_t.localEulerAngles.z);
+        
 
-        wheel_t.Rotate(spinAmt, 0, 0);
+        wheel_t.localEulerAngles = new Vector3(wheel_t.localEulerAngles.x, 0.25f * wheel_col.steerAngle - wheel_t.localEulerAngles.z, wheel_t.localEulerAngles.z);
+
+        //wheel_t.RotateAround(offset, new Vector3(wheel_t.localEulerAngles.x, 0, 0), spinAmt);
     }
     
 }
