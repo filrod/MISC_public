@@ -11,6 +11,11 @@ public class WheelTansforms : MonoBehaviour {
     public WheelCollider wheelRL;
     public WheelCollider wheelRR;
 
+    public Transform wheelFL_trans;
+    public Transform wheelFR_trans;
+    public Transform wheelRL_trans;
+    public Transform wheelRR_trans;
+
     public float maxTorque = 50;
 
     // Use this for initialization
@@ -20,6 +25,14 @@ public class WheelTansforms : MonoBehaviour {
 
         // Set low center of mass
         car.centerOfMass = new Vector3(0, -0.8f, 0);
+    }
+
+    private void Update()
+    {
+        rotateWheel(wheelFL_trans, wheelFL);
+        rotateWheel(wheelFR_trans, wheelFR);
+        rotateWheel(wheelRL_trans, wheelRL);
+        rotateWheel(wheelRR_trans, wheelRR);
     }
 
     // Called several times per frame (physics)
@@ -86,6 +99,20 @@ public class WheelTansforms : MonoBehaviour {
             wheel.motorTorque = (float)Math.Pow(maxTorque, 3)
                                 * drive;
         }
+    }
+
+    private void rotateWheel(Transform wheel_t, WheelCollider wheel_col) {
+        /*
+         * Method to rotate wheel.
+         */
+        int perMin = 60;
+        int degPerRot = 360;
+        float spinAmt = wheel_col.rpm
+                       / (degPerRot * perMin * Time.deltaTime);
+
+        wheel_t.localEulerAngles = new Vector3(wheel_t.localEulerAngles.x, wheel_col.steerAngle - wheel_t.localEulerAngles.z, wheel_t.localEulerAngles.z);
+
+        wheel_t.Rotate(spinAmt, 0, 0);
     }
     
 }
