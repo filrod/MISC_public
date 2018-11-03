@@ -56,15 +56,15 @@ public class ArrayStructures {
 		String command = "" + input.nextLine().toLowerCase();
 		int commandInt;
 		
-		while(!input.nextLine().toLowerCase().contains("quit")) {
+		while(!command.contains("quit")) {
 			
 			try {
-				
-				commandInt =  Integer.parseInt(command.replaceAll("[^0-9]+", " "));
-						
+					
 				if (command.contains("find index")) 
 				{
 				
+					commandInt =  Integer.parseInt(command.replaceAll("[^0-9]+", ""));
+					System.out.println(commandInt);
 					System.out.println(
 							           newArray
 							           .getValueAtIndex(commandInt)
@@ -74,7 +74,7 @@ public class ArrayStructures {
 						   && !command.contains("contains")
 						   ) 
 				{
-					
+					commandInt =  Integer.parseInt(command.replaceAll("[^0-9]+", ""));
 					if(newArray.valIntheArray(commandInt)) {
 						
 						System.out.println(
@@ -85,9 +85,10 @@ public class ArrayStructures {
 						System.out.println("This value is not in the array!");
 					}
 					
-				} else if(command.contains("Contains")) {
+				} else if(command.contains("contains")) {
 					
-	
+					commandInt =  Integer.parseInt(command.replaceAll("[^0-9]+", ""));
+					
 					if(newArray.valIntheArray(commandInt)) {
 						System.out.println("Yes!");
 					} else {
@@ -156,8 +157,10 @@ public class ArrayStructures {
 		
 		for (int i=0; i < arraySize; i++) {
 			
-			if (theArray[i]>index)
-				index = theArray[i];
+			if (theArray[i]==value) {
+				index = i;
+				break;
+			}
 		}
 		
 		return index;
