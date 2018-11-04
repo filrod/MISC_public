@@ -8,6 +8,11 @@ public class Sorting {
 		bubbleSort(a);
 		printArray(a);
 		
+		int[] b = getRandArr();
+		printArray(b);
+		selectionSort(b);
+		printArray(b);
+		
 
 	}
 	
@@ -59,6 +64,25 @@ public class Sorting {
 			}
 		}
 		//System.out.println(1.0*counter/Math.pow(unsorted.length, 2)+"*n^2");
+		return unsorted;
+	}
+	
+	public static int[] selectionSort(int[] unsorted) {
+		
+		int tmpVal;
+		
+		for (int unsortedI_o = 0; unsortedI_o < unsorted.length; unsortedI_o++) {
+			for (int i=unsortedI_o; i<unsorted.length; i++) {
+				
+				
+				if (unsorted[i]<unsorted[unsortedI_o]) {
+					tmpVal = unsorted[unsortedI_o];;
+					unsorted[unsortedI_o] = unsorted[i];
+					unsorted[i] = tmpVal;
+				}
+				
+			}
+		}
 		return unsorted;
 	}
 	
