@@ -19,6 +19,11 @@ public class Clock : MonoBehaviour
     public Text timeText;
     public Text Game_over;
 
+    public Rigidbody car;
+    public WheelCollider wheel;
+    public Text rpm_text;
+    public Text speed;
+
     private bool gold   = true;
     private bool silver = true;
     private bool bronze = true;
@@ -28,7 +33,7 @@ public class Clock : MonoBehaviour
 
         float min_t = Mathf.FloorToInt(timeInSec / 60F);
         float sec_t = Mathf.FloorToInt(timeInSec - min_t * 60);
-        return string.Format("{0:00}:{1:00}", min_t, sec_t);
+        return string.Format("{0:0}min {1:00}sec.", min_t, sec_t);
 
     }
     // Use this for initialization
@@ -45,25 +50,32 @@ public class Clock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float k_mult = 2.1f;
+        rpm_text.text = string.Format(
+                                      "{0:00}rpm", 
+                                      (
+                                       k_mult*5.0225 * car.velocity.magnitude
+                                       /(2f*Mathf.PI*wheel.radius))
+                                       );
 
-        time = time - Time.deltaTime;
-        float min_t = Mathf.FloorToInt(time / 60F);
-        float sec_t = Mathf.FloorToInt(time - min_t * 60);
+        speed.text = string.Format(
+                                   "{0:0}km/h",
+                                   k_mult*car.velocity.magnitude
+                                   );
+
+        time = time + Time.deltaTime;
 
         timeText.text = gold_str
                       + silver_str
                       + bronze_str
-                      + "Time:"
+                      + "Time: "
                       + makeTimeStr(time); // time.ToString("00"); 
 
         if (time > gold_time && gold)
         {
             gold = false;
 
-            timeText.text = silver_str
-                          + bronze_str
-                          + "Time:"
-                          + makeTimeStr(time);
+            gold_str = "";
             silver = true;
 
         }
@@ -72,9 +84,8 @@ public class Clock : MonoBehaviour
         {
             silver = false;
 
-            timeText.text = bronze_str
-                          + "Time:"
-                          + makeTimeStr(time);
+            silver_str = "";
+
             bronze = true;
 
         }
@@ -83,7 +94,9 @@ public class Clock : MonoBehaviour
         {
             bronze = false;
 
-            timeText.text = "Time:\n"
+            bronze_str = "";
+
+            timeText.text = "Time: "
                           + makeTimeStr(time);
 
         }
@@ -93,7 +106,7 @@ public class Clock : MonoBehaviour
             Game_over.text = "Game Over";
         }
 
-        if (time > bronze_time + 12)
+        if (time > bronze_time + 13)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
