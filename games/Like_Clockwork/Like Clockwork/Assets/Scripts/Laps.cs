@@ -4,34 +4,47 @@ using UnityEngine;
 
 public class Laps : MonoBehaviour {
 
-    public Collider firstTrigger;
-    public Collider secondTrigger;
-    public Collider Lap;
+    static int lap;
+    private bool firstCheckpoint;
+    private bool secondCheckpoint;
 
-    private string[] tags;
 
     // Use this for initialization
     void Start () {
-        tags = new string[3];
-        tags[0] = firstTrigger.tag;
-        tags[1] = secondTrigger.tag;
-        tags[3] = Lap.tag;
-	}
+        lap = 0;
+        firstCheckpoint = false;
+        secondCheckpoint = false;
 
-    void OnCollisionEnter(Collision collision)
+    }
+
+    private void OnTriggerEnter(Collider other)
     {
-        foreach (ContactPoint contact in collision.contacts)
+        if (other.gameObject.CompareTag("Lap"))
         {
 
+            if (firstCheckpoint && secondCheckpoint)
+            {
+                lap++;
+
+                firstCheckpoint = false;
+                secondCheckpoint = false;
+            }
+        }
+
+        if (other.gameObject.CompareTag("firstCheckpoint"))
+        {
+            firstCheckpoint = true;
+        }
+
+        if (other.gameObject.CompareTag("secondCheckpoint"))
+        {
+            secondCheckpoint = true;
         }
 
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update () {
-	}
+        // Update is called once per frame
+        void Update () {
+
+	    }
 }
