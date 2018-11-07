@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour {
     private Vector3 view;
 
     private float distance = 9.3f;
-    private float height = 2.46f;
+    private float height = 1.46f;
 
     // Visual effects
     private float rotationDamp = 3.0f;
@@ -102,7 +102,7 @@ public class CameraController : MonoBehaviour {
         transform.position -= currRotation
                               * Vector3.forward
                               * distance;
-        transform.position = new Vector3(transform.position.x, height, transform.position.z);
+        transform.position = new Vector3(transform.position.x, car_t.position.y + height, transform.position.z);
         transform.LookAt(car_t);
     }
 
