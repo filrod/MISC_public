@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Timer : MonoBehaviour
+public class Clock : MonoBehaviour
 {
 
     public float gold_time   = 170f;
@@ -12,6 +12,8 @@ public class Timer : MonoBehaviour
     public float bronze_time = 280f;
 
     private string gold_str;
+    private string silver_str;
+    private string bronze_str;
 
     public float time;
     public Text timeText;
@@ -21,10 +23,21 @@ public class Timer : MonoBehaviour
     private bool silver = true;
     private bool bronze = true;
 
+    // Make a time string
+    string makeTimeStr(float timeInSec) {
 
+        float min_t = Mathf.FloorToInt(timeInSec / 60F);
+        float sec_t = Mathf.FloorToInt(timeInSec - min_t * 60);
+        return string.Format("{0:00}:{1:00}", min_t, sec_t);
+
+    }
     // Use this for initialization
     void Start()
     {
+        gold_str       = "Gold: " + makeTimeStr(gold_time) + "\n";
+        silver_str       = "Silver: " + makeTimeStr(silver_time) + "\n";
+        bronze_str       = "Bronze: " + makeTimeStr(bronze_time)+ "\n";
+
         Game_over.text = "";
 
     }
@@ -37,20 +50,20 @@ public class Timer : MonoBehaviour
         float min_t = Mathf.FloorToInt(time / 60F);
         float sec_t = Mathf.FloorToInt(time - min_t * 60);
 
-        timeText.text = "Gold: 1min30sec" 
-                      + "\nSilver: 1min30sec" 
-                      + "\nBronze: 1min30sec"
-                      + "\nTime:\n"
-                      + string.Format("{0:00}:{1:00}", min_t, sec_t); // time.ToString("00"); 
+        timeText.text = gold_str
+                      + silver_str
+                      + bronze_str
+                      + "Time:"
+                      + makeTimeStr(time); // time.ToString("00"); 
 
         if (time > gold_time && gold)
         {
             gold = false;
 
-            timeText.text = "Silver: 1min30sec"
-                          + "\nBronze: 1min30sec"
-                          + "\nTime:\n"
-                          + string.Format("{0:00}:{1:00}", min_t, sec_t);
+            timeText.text = silver_str
+                          + bronze_str
+                          + "Time:"
+                          + makeTimeStr(time);
             silver = true;
 
         }
@@ -59,9 +72,9 @@ public class Timer : MonoBehaviour
         {
             silver = false;
 
-            timeText.text = "Bronze: 1min30sec"
-                          + "\nTime:\n"
-                          + string.Format("{0:00}:{1:00}", min_t, sec_t);
+            timeText.text = bronze_str
+                          + "Time:"
+                          + makeTimeStr(time);
             bronze = true;
 
         }
@@ -71,7 +84,7 @@ public class Timer : MonoBehaviour
             bronze = false;
 
             timeText.text = "Time:\n"
-                          + string.Format("{0:00}:{1:00}", min_t, sec_t);
+                          + makeTimeStr(time);
 
         }
 
