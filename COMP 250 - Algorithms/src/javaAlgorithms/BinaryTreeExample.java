@@ -64,6 +64,107 @@ public class BinaryTreeExample{
 			
 	}
 	
+	public Node delete(int key) {
+		
+		Node nodeOfInterest = root;
+		Node parent = root;
+		Node deletedNode;
+		
+		boolean isLeftChild = true;
+		
+		while(nodeOfInterest.key != key) {
+			
+			parent = nodeOfInterest;
+			
+			if (key<nodeOfInterest.key) {
+				
+				isLeftChild = true;
+				nodeOfInterest = nodeOfInterest.leftChild;
+				
+			}else {
+				
+				isLeftChild = false;
+				nodeOfInterest = nodeOfInterest.rightChild;
+			}
+			
+			if (nodeOfInterest == null)
+				return null;
+		}
+		
+		if (nodeOfInterest.leftChild == null && nodeOfInterest.rightChild == null) {
+			
+			if (nodeOfInterest == root) {
+				deletedNode = root;
+				root = null;
+			} else if (isLeftChild) {
+				deletedNode = parent.leftChild;
+				parent.leftChild = null;
+			} else {
+				deletedNode = parent.rightChild;
+				parent.rightChild = null;
+			}
+		} 
+		
+		else if (nodeOfInterest.rightChild == null) {
+			
+			if (nodeOfInterest == root)
+				root = nodeOfInterest.leftChild;
+			
+			else if (isLeftChild) 
+				parent.leftChild = nodeOfInterest.leftChild;
+			
+			else parent.rightChild = nodeOfInterest.leftChild;
+				
+		}
+		
+		else if(nodeOfInterest.leftChild == null) {
+			
+			if (nodeOfInterest == root)
+				root = nodeOfInterest.rightChild;
+			
+			else if (isLeftChild)
+				parent.leftChild = nodeOfInterest.leftChild;
+			
+			else parent.rightChild = nodeOfInterest.leftChild;
+			
+		}
+		
+		else {
+			Node sub = getSubstitutionNode(nodeOfInterest);
+			
+			if (nodeOfInterest == root)
+				root = sub;
+			
+			else if (isLeftChild)
+				parent.leftChild = sub;
+			
+			else parent.rightChild = sub;
+				
+			sub.leftChild = nodeOfInterest.leftChild;
+		}
+		return this.root;
+	}
+	
+	private Node getSubstitutionNode(Node tosub) {
+		Node tosubParent = tosub;
+		Node sub = tosub;
+		Node nodeOfInterest = tosub.rightChild;
+		
+		while (nodeOfInterest != null) {
+			
+			tosubParent = tosub;
+			sub = nodeOfInterest;
+			nodeOfInterest = nodeOfInterest.leftChild;
+		
+		}
+		
+		if (sub != tosub.rightChild) {
+			tosubParent.leftChild = sub.rightChild;
+			sub.rightChild = tosub.rightChild;
+		}
+		return sub;
+	}
+
 	public Node search(int key) {
 		
 		Node nodeOfInterest = root;
