@@ -64,6 +64,28 @@ public class BinaryTreeExample{
 			
 	}
 	
+	public Node search(int key) {
+		
+		Node nodeOfInterest = root;
+		
+		while(nodeOfInterest.key != key) {
+			
+			if (key<nodeOfInterest.key) {
+				
+				nodeOfInterest = nodeOfInterest.leftChild;
+				
+			}else {
+				
+				nodeOfInterest = nodeOfInterest.rightChild;
+			}
+			
+			if (nodeOfInterest==null)
+				return null;
+		}
+		
+		return nodeOfInterest;
+	}
+	
 	public void inOrderTraversal(Node nodeOfInterest){
 		/*
 		 * This method goes through the binary tree and 
@@ -141,6 +163,8 @@ public class BinaryTreeExample{
 					     , randStr((int)(Math.random()*10)));
 		}
 		tree.inOrderTraversal(tree.root);
+		
+		System.out.println("Search for key=700: \n" +tree.search(700));
 	
 	}
 
