@@ -212,9 +212,9 @@ public class BinaryTreeExample{
 			
 			System.out.println(nodeOfInterest.toString());
 
-			inOrderTraversal(nodeOfInterest.leftChild);
+			preOrderTraversal(nodeOfInterest.leftChild);
 			
-			inOrderTraversal(nodeOfInterest.rightChild);
+			preOrderTraversal(nodeOfInterest.rightChild);
 			
 		}
 	}
@@ -225,9 +225,9 @@ public class BinaryTreeExample{
 		 */
 		if (nodeOfInterest != null){
 			
-			inOrderTraversal(nodeOfInterest.leftChild);
+			postOrderTraversal(nodeOfInterest.leftChild);
 			
-			inOrderTraversal(nodeOfInterest.rightChild);
+			postOrderTraversal(nodeOfInterest.rightChild);
 			
 			System.out.println(nodeOfInterest.toString());
 			
