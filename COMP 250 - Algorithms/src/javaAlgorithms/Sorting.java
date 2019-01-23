@@ -3,6 +3,10 @@ package javaAlgorithms;
 public class Sorting {
 
 	public static void main(String[] args) {
+		
+		
+		System.out.println(  fibonacciCheckSame( 30, new int[]{2, 5} )  );
+		/*
 		int[] a = getRandArr();
 		printArray(a);
 		bubbleSort(a);
@@ -12,6 +16,7 @@ public class Sorting {
 		printArray(b);
 		selectionSort(b);
 		printArray(b);
+		*/
 		
 
 	}
@@ -76,7 +81,7 @@ public class Sorting {
 				
 				
 				if (unsorted[i]<unsorted[unsortedI_o]) {
-					tmpVal = unsorted[unsortedI_o];;
+					tmpVal = unsorted[unsortedI_o];
 					unsorted[unsortedI_o] = unsorted[i];
 					unsorted[i] = tmpVal;
 				}
@@ -86,6 +91,73 @@ public class Sorting {
 		return unsorted;
 	}
 	
+	private static int fibonacciIterative(int p_Num) {
+		
+		if (p_Num<3)
+			return 1;
+		
+		int tmp;
+		
+		int f_a    = 1; 
+		int f_b    = 1;
+		
+		for (int i=2; i<p_Num; i++) {
+			tmp = f_b;
+			f_b = f_a + f_b;
+			f_a = tmp;
+		}
+		return f_b;
+	}
+	
+	private static int fibonacciRecursive(int p_Num) {
+		
+		if (p_Num < 3)
+			return 1;
+		
+		return fibonacciRecursive(p_Num-1) + fibonacciRecursive(p_Num-2);
+	}
+	
+	private static boolean fibonacciCheckSame(int p_sampleSize, int[] p_sampleRange) {
+		
+		// Must handle exception when p_sampleRange.length > 2
+		
+		final int MIN = p_sampleRange[0];
+		final int MAX = p_sampleRange[1];
+		
+		// ----------- User constraints -------------------
+		if (p_sampleRange[1] - p_sampleRange[0] > 6) {
+			System.out.println("Sample range too big default [0, 5) was made");
+			p_sampleRange[0] = 0;
+			p_sampleRange[1] = 5;
+		}
+		
+		if (p_sampleRange[0] > 4 || p_sampleRange[1] > 6) {
+			System.out.println("Argumet in sample range too big default [0, 5) was made");
+			p_sampleRange[0] = 0;
+			p_sampleRange[1] = 5;
+		}
+		// --------------------------------------------------
+		
+		int num;
+		
+		for (int i=0; i<p_sampleSize; i++) {
+			
+			num = MIN + (int)(Math.random() * ((MAX - MIN)));
+			
+			if (fibonacciRecursive(num) != fibonacciIterative(num)) {
+				
+				System.out.println("nb: " +num+ "\nRecursive: " +fibonacciRecursive(num)+ "\nIterative: " +fibonacciIterative(num));
+				return false;
+			}
+				
+		}
+		
+		return true;
+	}
+	
+	// Searching
+	
+	//public static binSearch() {}
 	
 
 }
