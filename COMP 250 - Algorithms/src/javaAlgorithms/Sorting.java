@@ -157,7 +157,30 @@ public class Sorting {
 	
 	// Searching
 	
-	//public static binSearch() {}
+	public static int binSearch(double[] p_orderedArrayToSearch, double p_val) throws IllegalArgumentException{
+		
+		if (p_orderedArrayToSearch == null || p_orderedArrayToSearch.length ==0) {
+			System.out.println("The array must have length greater than 0");
+			throw new IllegalArgumentException();
+		}
+		
+		int l=0;
+		int r= p_orderedArrayToSearch.length-1;
+		int mid;
+		
+		while(l<r) {
+			
+			mid = (r+l)/2;
+			if (p_val<p_orderedArrayToSearch[mid]) {
+				l = mid+1;
+			} else if (p_val>p_orderedArrayToSearch[mid]) {
+				r = mid-1;
+			} else {
+				return mid;
+			}
+		}
+		return l;
+	}
 	
 
 }
