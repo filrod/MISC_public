@@ -6,37 +6,33 @@ using UnityEngine.SceneManagement;
 
 public class Clock : MonoBehaviour
 {
-
-    public float gold_time   = 170f;
+    // Fields ===========================
+    // public:
+    //           times for prize to be chosen
+    public float gold_time   = 170f;  // Defaults
     public float silver_time = 190f;
     public float bronze_time = 280f;
-
+    // -    -    -    -    -    -    -    -    -    - 
+    public float time;                // Current time
+    // UI texts  -    -    -    -    -    -    -    -
+    public Text timeText;
+    public Text Game_over;
+    public Text rpm_text;
+    public Text speed;
+    // -    -    -    -    -    -    -    -    -    -
+    public Rigidbody car;
+    public WheelCollider wheel;
+    //  -   -   -   -   -   -   -   -   -   -   -   -
+    // private:
     private string gold_str;
     private string silver_str;
     private string bronze_str;
-
-    public float time;
-    public Text timeText;
-    public Text Game_over;
-
-    public Rigidbody car;
-    public WheelCollider wheel;
-    public Text rpm_text;
-    public Text speed;
-
+    // -    -    -    -    -    -    -    -    -    -
     private bool gold   = true;
     private bool silver = true;
     private bool bronze = true;
 
-    // Make a time string
-    string makeTimeStr(float timeInSec) {
-
-        float min_t = Mathf.FloorToInt(timeInSec / 60F);
-        float sec_t = Mathf.FloorToInt(timeInSec - min_t * 60);
-        return string.Format("{0:0}min {1:00}sec.", min_t, sec_t);
-
-    }
-    // Use this for initialization
+    // Initialization
     void Start()
     {
         gold_str       = "Gold: " + makeTimeStr(gold_time) + "\n";
@@ -46,6 +42,15 @@ public class Clock : MonoBehaviour
         Game_over.text = "";
 
     }
+    // Make a time string
+    string makeTimeStr(float timeInSec) {
+
+        float min_t = Mathf.FloorToInt(timeInSec / 60F);
+        float sec_t = Mathf.FloorToInt(timeInSec - min_t * 60);
+        return string.Format("{0:0}min {1:00}sec.", min_t, sec_t);
+
+    }
+    
 
     // Update is called once per frame
     void Update()
