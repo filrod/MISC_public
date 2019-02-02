@@ -2,7 +2,7 @@ package javaAlgorithms;
 
 public class Intro {
 	
-	public static void info() {
+	public static void main(String[] args) {
 		
 		System.out.println(
 				           "Main Data Structure Operations:"
