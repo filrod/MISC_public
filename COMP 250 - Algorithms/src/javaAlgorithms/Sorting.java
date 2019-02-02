@@ -2,8 +2,6 @@ package javaAlgorithms;
 
 import java.util.Arrays;
 
-import org.junit.Test;
-
 public class Sorting {
 
 	public static void main(String[] args) {
