@@ -1,5 +1,9 @@
 package javaAlgorithms;
 
+import java.util.Arrays;
+
+import org.junit.Test;
+
 public class Sorting {
 
 	public static void main(String[] args) {
@@ -17,8 +21,6 @@ public class Sorting {
 		selectionSort(b);
 		printArray(b);
 		*/
-		
-
 	}
 	
 	private static int[] getRandArr() {
@@ -155,6 +157,12 @@ public class Sorting {
 		return true;
 	}
 	
+	/*@Test
+	public void testFib(int min, int max) {
+		int num = min + (int)(Math.random() * ((max - min)));
+		assertEquals(fibonacciRecursive(num), fibonacciIterative(num));
+	}
+	*/
 	// Searching
 	
 	public static int binSearch(double[] p_orderedArrayToSearch, double p_val) throws IllegalArgumentException{
@@ -182,5 +190,41 @@ public class Sorting {
 		return l;
 	}
 	
-
+	/**
+	 * binarySearchRecursive() searches an int[] and tries to find 
+	 * pKey, the integer passed. If found this method returns true
+	 * and if not, it returns false. This method makes recursive 
+	 * calls each time into an array of half the size until it 
+	 * reaches the base case: pData's length is of one element.
+	 * 
+	 * @param pData      type: int[], 
+	 * 					 this is the array to search in
+	 * 
+	 * @param pKey       type: int,
+	 * 					 this is the element we wish to find
+	 * 
+	 * @return           type boolean,
+	 *                   true if pKey was found in pData, 
+	 *                   false otherwise
+	 */
+	public static boolean binarySearchRecursive(int[] pData, int pKey) {
+		
+		assert(pData.length>0);
+		
+		if (pData.length==1)
+			return pData[0]==pKey;
+		
+		int mid = (pData.length)/2;
+		if (pKey >= pData[mid])
+			return binarySearchRecursive(
+					Arrays.copyOfRange(pData, mid, pData.length), 
+					pKey
+					);
+		else
+			return binarySearchRecursive(
+					Arrays.copyOfRange(pData, 0, mid), 
+					pKey
+					);
+	}
+	
 }
