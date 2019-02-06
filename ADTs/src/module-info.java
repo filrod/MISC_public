@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author Filipe
+ *
+ */
+module abstractDataTypes {
+}
