@@ -14,6 +14,8 @@ import java.util.Iterator;
  * 
  * @version 1.0
  * 
+ * @warning All methods are to be tested
+ * 
  * Note: the type <E> and casting from object to this
  * must be done better. Many methods are unfinished.
  */
@@ -104,12 +106,20 @@ public class sLinkedList<E> implements listContract{
 	public void add(Object e, int i) {
 		/**
 		 * @Overide
-		 * @param e : Type Obeject <E>
+		 * @param e : Type Object <E>
 		 * @param i : Type int
 		 * 
 		 * Note: not sure it works well yet.
 		 * I wish to use the iterator private class.
 		 */
+		
+		if (i==this.size) {
+			addLast(e);
+			return;
+		}
+		
+		assert(i<this.size);
+		
 		sNode<E> currentNode = this.head;
 		for (int j=1; j<=i; j++)
 			currentNode = currentNode.next;
@@ -124,34 +134,90 @@ public class sLinkedList<E> implements listContract{
 	@Override
 	public E removeFirst() {
 		// TODO Auto-generated method stub
+		E tmpElement = this.head.element;
+		this.head = this.head.next;
 		this.size--;
-		return null;
+		return tmpElement;
 	}
 
 	@Override
 	public E removeLast() {
 		// TODO Auto-generated method stub
+		E tmpElement = this.tail.element;
+		sNode<E> currentNode = this.head;
+		for (int j=1; j<this.size-1; j++)
+			currentNode = currentNode.next;
+		this.tail = currentNode;
+		currentNode.next = null;
 		this.size--;
-		return null;
+		return tmpElement;
 	}
 
 	@Override
 	public E remove(int i) {
 		// TODO Auto-generated method stub
+		
+		assert(i<this.size);
+		
+		E tmpElement;
+		sNode<E> currentNode = this.head;
+		
+		// Edge case 1
+		if (i==0) {
+			tmpElement = removeFirst();
+			return tmpElement;
+		}
+		
+		// Edge case 2
+		if (i==this.size-1) {
+			tmpElement = removeLast();
+			return tmpElement;
+		}
+			
+		for (int j=0; j<i-1; j++)
+			currentNode = currentNode.next;
+		
+		tmpElement = currentNode.next.element;
+		currentNode.next = currentNode.next.next;
 		this.size--;
-		return null;
+		
+		return tmpElement;
 	}
 
 	@Override
 	public E get(int i) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		assert(this.size!=0);
+		assert(i<this.size);
+		
+		
+		
+		// Edge case 1
+		if (i==0)
+			return this.head.element;
+		
+		// Edge case 2
+		if (i==this.size-1)
+			return this.tail.element;
+		
+		sNode<E> currentNode = this.head;
+		E tmpElement = currentNode.element;
+		
+		for (int j=0; j<=i-1; j++)
+			currentNode = currentNode.next;
+		
+		tmpElement = currentNode.element;
+		
+		return tmpElement;
 	}
 
 
 	@Override
+	/**
+	 * @unfinished
+	 */
 	public boolean getElement(Object e) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
