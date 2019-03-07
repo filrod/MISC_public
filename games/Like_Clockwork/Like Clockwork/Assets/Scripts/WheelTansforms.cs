@@ -114,9 +114,9 @@ public class WheelTansforms : MonoBehaviour {
 
         wheel_t.localEulerAngles = new Vector3(wheel_t.localEulerAngles.x, 0.25f * wheel_col.steerAngle - wheel_t.localEulerAngles.z, wheel_t.localEulerAngles.z);
 
-        //wheel_t.Rotate(this.transform.worldToLocalMatrix*this.transform.right, spinAmt, Space.Self);
+        wheel_t.Rotate(this.transform.worldToLocalMatrix*this.transform.right, spinAmt, Space.Self);
         //wheel_t.RotateAroundLocal(wheel_t.right, spinAmt);
-        //wheel_t.RotateAround(wheel_t.tra,wheel_t.worldToLocalMatrix * wheel_t.right, spinAmt);
+        //wheel_t.RotateAround(wheel_t.transform.worldToLocalMatrix * wheel_t.right, spinAmt);
     }
     
 }

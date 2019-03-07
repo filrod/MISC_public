@@ -36089,8 +36089,8 @@ MonoBehaviour:
   Game_over: {fileID: 109819252}
   rpm_text: {fileID: 811239014}
   speed: {fileID: 931452369}
-  car: {fileID: 1920207637}
-  wheel: {fileID: 2093684250}
+  car: {fileID: 726418546}
+  wheel: {fileID: 1776210234}
 --- !u!1001 &1206497814
 PrefabInstance:
   m_ObjectHideFlags: 0
