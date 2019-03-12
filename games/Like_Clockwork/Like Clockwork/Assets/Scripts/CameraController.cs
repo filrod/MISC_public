@@ -18,12 +18,12 @@ public class CameraController : MonoBehaviour {
     private Vector3 view;
 
     private float distance = 9.3f;
-    private float height = 1.46f;
+    private float height = 1.26f;
 
     // Visual effects
     private float rotationDamp = 3.0f;
     private float heightDamp = 2.0f;
-    private float zoomRatio = 0.5f;
+    private float zoomRatio = 0.7f;
 
     private Vector3 rotationVec;
 
