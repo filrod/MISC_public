@@ -19,6 +19,7 @@ public class WheelTansforms : MonoBehaviour {
     public float maxTorque = 50;
 
     public AudioSource engineSound;
+    private float acceleration;
 
     // Use this for initialization
     void Start() {
@@ -27,6 +28,9 @@ public class WheelTansforms : MonoBehaviour {
 
         // Set low center of mass
         car.centerOfMass = new Vector3(0, -0.8f, 0);
+        acceleration = 0;
+        engineSound.Play();
+        engineSound.Pause();
     }
 
     private void Update()
@@ -35,6 +39,7 @@ public class WheelTansforms : MonoBehaviour {
         rotateWheel(wheelFR_trans, wheelFR, 1.82f);
         rotateWheel(wheelRL_trans, wheelRL, -1.65f);
         rotateWheel(wheelRR_trans, wheelRR, -1.65f);
+        getEngineSound(wheelRR);
     }
 
     // Called several times per frame (physics)
@@ -80,11 +85,8 @@ public class WheelTansforms : MonoBehaviour {
          * Acceleration factor dependant on rpm.
          */
 
-        if (wheelRR.motorTorque > 0) { engineSound.Play(); }
-
         if (wheel.rpm < 6 && drive > 0.1)
         {
-            
             wheelRR.motorTorque = float.MaxValue;
         }
         else if (wheel.rpm < 30 && drive > 0.1)
@@ -123,5 +125,59 @@ public class WheelTansforms : MonoBehaviour {
         //wheel_t.RotateAroundLocal(wheel_t.right, spinAmt);
         //wheel_t.RotateAround(wheel_t.transform.worldToLocalMatrix * wheel_t.right, spinAmt);
     }
+
+    void getEngineSound(WheelCollider wheel)
+    {
+        /*
+         * Acceleration factor dependant on rpm.
+         *
+        bool isAccelerating = wheelRR.rpm > 0;
+
+        if (isAccelerating && gearShift < 1)
+        {
+            engineSound.Play();
+            gearShift = 1;
+        }
+
+        if (wheel.rpm < 6)
+        {
+            if (gearShift > 1) { engineSound.Stop(); }
+            gearShift = 1;
+        }
+        else if (wheel.rpm < 30)
+        {
+            if (gearShift > 2) { engineSound.Stop(); }
+            gearShift = 2;
+        }
+        else if (wheel.rpm < 80)
+        {
+            if (gearShift > 3) { engineSound.Stop(); }
+            gearShift = 3;
+        }
+        else if (wheel.rpm < 90)
+        {
+            if (gearShift > 4) { engineSound.Stop(); }
+            gearShift = 4;
+        }
+        else
+        {
+            if (gearShift > 5) { engineSound.Stop(); }
+            gearShift = 5;
+        }
     
+        */
+
+        bool isAccelerating = Math.Abs(car.velocity.magnitude) > acceleration;
+
+        if (isAccelerating)
+        {
+            if (!engineSound.isPlaying) 
+                engineSound.Play();
+        }
+        else
+        {
+            engineSound.Stop();
+        }
+        acceleration = car.velocity.magnitude;
+    }
 }
