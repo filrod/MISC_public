@@ -18,6 +18,8 @@ public class WheelTansforms : MonoBehaviour {
 
     public float maxTorque = 50;
 
+    public AudioSource engineSound;
+
     // Use this for initialization
     void Start() {
 
@@ -78,8 +80,11 @@ public class WheelTansforms : MonoBehaviour {
          * Acceleration factor dependant on rpm.
          */
 
+        if (wheelRR.motorTorque > 0) { engineSound.Play(); }
+
         if (wheel.rpm < 6 && drive > 0.1)
         {
+            
             wheelRR.motorTorque = float.MaxValue;
         }
         else if (wheel.rpm < 30 && drive > 0.1)
