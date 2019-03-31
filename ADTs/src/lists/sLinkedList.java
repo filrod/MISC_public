@@ -22,6 +22,13 @@ import java.util.Iterator;
 
 public class sLinkedList<E> implements listContract<E>{
 	
+	public static void main(String[] args) {
+		
+		sLinkedList<String> list = new sLinkedList<String>();
+		list.addFirst("Hiu");
+		System.out.println(list.get(0));
+	}
+	
 	// Attributes	
 	private sNode<E> head;
 	private sNode<E> tail;
@@ -30,6 +37,8 @@ public class sLinkedList<E> implements listContract<E>{
 	// Constructor
 	public sLinkedList() {
 		// TODO Auto-generated constructor stub
+		this.head = null;
+		this.tail = null;
 		size = 0;
 	}
 
