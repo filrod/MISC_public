@@ -25,8 +25,7 @@ public class sLinkedList<E> implements listContract<E>{
 	public static void main(String[] args) {
 		
 		sLinkedList<String> list = new sLinkedList<String>();
-		list.addFirst("Hiu");
-		System.out.println(list.get(0));
+		list.removeFirst();
 	}
 	
 	// Attributes	
