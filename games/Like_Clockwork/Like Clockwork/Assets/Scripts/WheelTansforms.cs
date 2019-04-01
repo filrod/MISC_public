@@ -19,6 +19,7 @@ public class WheelTansforms : MonoBehaviour {
     public float maxTorque = 50;
 
     public AudioSource engineSound;
+    public AudioSource downShift;
     private float acceleration;
 
     // Use this for initialization
@@ -29,8 +30,6 @@ public class WheelTansforms : MonoBehaviour {
         // Set low center of mass
         car.centerOfMass = new Vector3(0, -0.8f, 0);
         acceleration = 0;
-        engineSound.Play();
-        engineSound.Pause();
     }
 
     private void Update()
@@ -39,7 +38,6 @@ public class WheelTansforms : MonoBehaviour {
         rotateWheel(wheelFR_trans, wheelFR, 1.82f);
         rotateWheel(wheelRL_trans, wheelRL, -1.65f);
         rotateWheel(wheelRR_trans, wheelRR, -1.65f);
-        getEngineSound(wheelRR);
     }
 
     // Called several times per frame (physics)
@@ -78,6 +76,7 @@ public class WheelTansforms : MonoBehaviour {
         float steer = Input.GetAxis("Horizontal");
         wheelFR.steerAngle = 30 * steer;
         wheelFL.steerAngle = 30 * steer;
+        getEngineSound(wheelRR);
     }
 
     void Acceleration(WheelCollider wheel, float drive) {
@@ -167,17 +166,25 @@ public class WheelTansforms : MonoBehaviour {
     
         */
 
-        bool isAccelerating = Math.Abs(car.velocity.magnitude) > acceleration;
-
+        bool isAccelerating = Math.Abs(car.velocity.x + car.velocity.z) > (acceleration + 0.001);
+        if(Math.Abs(car.velocity.x + car.velocity.z) < 0.2)
+        {
+            isAccelerating = false;
+        }
+        Debug.Log(Math.Abs(car.velocity.x + car.velocity.z));
         if (isAccelerating)
         {
+            Debug.Log(engineSound.isPlaying);
+            downShift.Stop();
             if (!engineSound.isPlaying) 
                 engineSound.Play();
         }
         else
         {
-            engineSound.Stop();
+            engineSound.Pause();
+            if (!downShift.isPlaying)
+                downShift.Play();
         }
-        acceleration = car.velocity.magnitude;
+        acceleration = Math.Abs(car.velocity.x + car.velocity.z) + 0.001f;
     }
 }
