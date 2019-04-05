@@ -2,7 +2,7 @@ package lists;
 
 public interface listContract<E> extends Iterable<E>{
 	
-	public int length();
+	public int size();
 	
 	public void addFirst(E e);
 	public void addLast(E e);

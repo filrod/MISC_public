@@ -20,7 +20,13 @@ import java.util.Iterator;
  * must be done better. Many methods are unfinished.
  */
 
-public class sLinkedList<E> implements listContract{
+public class sLinkedList<E> implements listContract<E>{
+	
+	public static void main(String[] args) {
+		
+		sLinkedList<String> list = new sLinkedList<String>();
+		list.removeFirst();
+	}
 	
 	// Attributes	
 	private sNode<E> head;
@@ -30,6 +36,8 @@ public class sLinkedList<E> implements listContract{
 	// Constructor
 	public sLinkedList() {
 		// TODO Auto-generated constructor stub
+		this.head = null;
+		this.tail = null;
 		size = 0;
 	}
 
@@ -80,33 +88,54 @@ public class sLinkedList<E> implements listContract{
 	
 	
 	@Override
-	public int length() {
+	public int size() {
 		// TODO Auto-generated method stub
 		return this.size;
 	}
 
 	@Override
-	public void addFirst(Object e) {
+	public void addFirst(E e) {
 		// TODO Auto-generated method stub
+		
+		// Edge case: The sLinkedList is empty
+		if (this.size == 0) {
+			
+			this.head = new sNode<E>( e );
+			this.tail = this.head;
+			this.size++;
+			return;
+		}
+		
 		sNode<E> tmp = this.head;
-		this.head = new sNode<E>( (E) e );
+		this.head = new sNode<E>( e );
 		this.head.next = tmp;
 		this.size++;
 	}
 
 	@Override
-	public void addLast(Object e) {
+	public void addLast(E e) {
 		// TODO Auto-generated method stub
-		this.tail.next = new sNode<E>( (E)e );
+		
+		// Edge case: The sLinkedList is empty
+		if (this.size == 0) {
+			
+			this.head = new sNode<E>( e );
+			this.tail = this.head;
+			this.size++;
+			return;
+		}
+		
+		this.tail.next = new sNode<E>( e );
+		this.tail = this.tail.next;
 		this.size++;
 		
 	}
 
 	@Override
-	public void add(Object e, int i) {
+	public void add(E e, int i) {
 		/**
 		 * @Overide
-		 * @param e : Type Object <E>
+		 * @param e : Type E
 		 * @param i : Type int
 		 * 
 		 * Note: not sure it works well yet.
@@ -134,6 +163,10 @@ public class sLinkedList<E> implements listContract{
 	@Override
 	public E removeFirst() {
 		// TODO Auto-generated method stub
+		
+		// Edge case: The list is empty
+		assert(this.size>0);
+		
 		E tmpElement = this.head.element;
 		this.head = this.head.next;
 		this.size--;
@@ -143,6 +176,10 @@ public class sLinkedList<E> implements listContract{
 	@Override
 	public E removeLast() {
 		// TODO Auto-generated method stub
+		
+		// Edge case: The list is empty
+		assert(this.size>0);
+		
 		E tmpElement = this.tail.element;
 		sNode<E> currentNode = this.head;
 		for (int j=1; j<this.size-1; j++)
@@ -158,6 +195,7 @@ public class sLinkedList<E> implements listContract{
 		// TODO Auto-generated method stub
 		
 		assert(i<this.size);
+		assert(i>=0);
 		
 		E tmpElement;
 		sNode<E> currentNode = this.head;
@@ -217,7 +255,7 @@ public class sLinkedList<E> implements listContract{
 	/**
 	 * @unfinished
 	 */
-	public boolean getElement(Object e) {
+	public boolean getElement(E e) {
 		return false;
 	}
 

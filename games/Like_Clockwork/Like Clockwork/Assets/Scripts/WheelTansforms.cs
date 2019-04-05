@@ -18,6 +18,10 @@ public class WheelTansforms : MonoBehaviour {
 
     public float maxTorque = 50;
 
+    public AudioSource engineSound;
+    public AudioSource downShift;
+    private float acceleration;
+
     // Use this for initialization
     void Start() {
 
@@ -25,6 +29,7 @@ public class WheelTansforms : MonoBehaviour {
 
         // Set low center of mass
         car.centerOfMass = new Vector3(0, -0.8f, 0);
+        acceleration = 0;
     }
 
     private void Update()
@@ -71,6 +76,7 @@ public class WheelTansforms : MonoBehaviour {
         float steer = Input.GetAxis("Horizontal");
         wheelFR.steerAngle = 30 * steer;
         wheelFL.steerAngle = 30 * steer;
+        getEngineSound(wheelRR);
     }
 
     void Acceleration(WheelCollider wheel, float drive) {
@@ -118,5 +124,67 @@ public class WheelTansforms : MonoBehaviour {
         //wheel_t.RotateAroundLocal(wheel_t.right, spinAmt);
         //wheel_t.RotateAround(wheel_t.transform.worldToLocalMatrix * wheel_t.right, spinAmt);
     }
+
+    void getEngineSound(WheelCollider wheel)
+    {
+        /*
+         * Acceleration factor dependant on rpm.
+         *
+        bool isAccelerating = wheelRR.rpm > 0;
+
+        if (isAccelerating && gearShift < 1)
+        {
+            engineSound.Play();
+            gearShift = 1;
+        }
+
+        if (wheel.rpm < 6)
+        {
+            if (gearShift > 1) { engineSound.Stop(); }
+            gearShift = 1;
+        }
+        else if (wheel.rpm < 30)
+        {
+            if (gearShift > 2) { engineSound.Stop(); }
+            gearShift = 2;
+        }
+        else if (wheel.rpm < 80)
+        {
+            if (gearShift > 3) { engineSound.Stop(); }
+            gearShift = 3;
+        }
+        else if (wheel.rpm < 90)
+        {
+            if (gearShift > 4) { engineSound.Stop(); }
+            gearShift = 4;
+        }
+        else
+        {
+            if (gearShift > 5) { engineSound.Stop(); }
+            gearShift = 5;
+        }
     
+        */
+
+        bool isAccelerating = Math.Abs(car.velocity.x + car.velocity.z) > (acceleration + 0.001);
+        if(Math.Abs(car.velocity.x + car.velocity.z) < 0.2)
+        {
+            isAccelerating = false;
+        }
+        Debug.Log(Math.Abs(car.velocity.x + car.velocity.z));
+        if (isAccelerating)
+        {
+            Debug.Log(engineSound.isPlaying);
+            downShift.Stop();
+            if (!engineSound.isPlaying) 
+                engineSound.Play();
+        }
+        else
+        {
+            engineSound.Pause();
+            if (!downShift.isPlaying)
+                downShift.Play();
+        }
+        acceleration = Math.Abs(car.velocity.x + car.velocity.z) + 0.001f;
+    }
 }
