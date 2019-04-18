@@ -1,11 +1,11 @@
 package Practice;
 
-import static org.junit.Assert.assertEquals;
+// ---------- Imports for JUnit tests ----------------------
+// import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.Iterator;
-
 import org.junit.jupiter.api.Test;
+// ---------------------------------------------------------
+import java.util.Iterator;
 
 /**
  * 
